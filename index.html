@@ -92,23 +92,29 @@ header::after{
   padding:0.85rem 1.75rem;
   cursor:pointer;
   position:relative;
-  transition:all 0.25s;
+  transition:all 0.25s cubic-bezier(.4,0,.2,1);
   letter-spacing:0.01em;
   border-radius:8px;
   margin:0.35rem 0.15rem;
+  transform:scale(0.96);
+  opacity:0.85;
 }
 .tab-btn:hover{
   color:#0a2e18;
   background:#ffd740;
   border-color:#f5b800;
-  transform:translateY(-1px);
+  transform:translateY(-1px) scale(1);
+  opacity:0.95;
   box-shadow:0 3px 10px rgba(245,184,0,0.35);
 }
 .tab-btn.active{
   color:#0a2e18;
   background:#ffd740;
   border-color:#fff;
-  box-shadow:0 3px 12px rgba(245,184,0,0.4);
+  box-shadow:0 4px 16px rgba(245,184,0,0.45);
+  transform:scale(1.05);
+  opacity:1;
+  z-index:2;
 }
 .tab-btn.active::after{
   content:"";
