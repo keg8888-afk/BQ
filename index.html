@@ -749,6 +749,55 @@ a:focus-visible,button:focus-visible,.tab-btn:focus-visible,.btn:focus-visible{
 .tab-panel.active{animation:vpFadeUp .28s ease both}
 @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}}
 
+/* ===== DESIGN POLISH 2: улучшения привлекательности всех страниц ===== */
+/* 1) FAQ — из чужой navy/teal палитры в фирменную зелёную
+   (инлайновые стили h2 перебиваются только !important) */
+#faq h2{color:var(--primary)!important;border-bottom-color:var(--primary)!important}
+/* Правила #faq живут во ВТОРОМ <style>-блоке в теле документа — позже данного слоя,
+   поэтому все переопределения требуют !important */
+#faq summary{color:var(--primary-dark)!important}
+#faq summary:hover{color:var(--primary)!important}
+#faq summary::after{color:var(--primary-light)!important}
+#faq details[open]{border-color:var(--primary-light)!important}
+#faq details p{color:var(--text-secondary)!important}
+/* 2) Под-навигация вкладки «Оборудование» — те же таблетки, что у «Запчастей»
+   (панель «Запчасти» уже использует такой язык; активный раздел — зелёная заливка) */
+.eq-nav-inner{gap:4px}
+.eq-nav a{padding:6px 11px;font-size:12.5px;line-height:1.35;color:var(--text-secondary);background:#fff;border:1px solid var(--border);border-radius:999px}
+.eq-nav a:hover{color:var(--primary);border-color:var(--primary-light);background:rgba(26,93,58,.05)}
+.eq-nav a.active{color:#fff;background:var(--primary);border-color:var(--primary)}
+/* 3) Карточки запчастей и оборудования: фирменная полоска сверху при наведении —
+   как у карточек кранов (унификация ховера всех каталогов) */
+.zp-card::before,.eq-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light));opacity:0;transition:opacity .3s;z-index:2;border-radius:var(--radius) var(--radius) 0 0;pointer-events:none}
+.zp-card:hover::before,.eq-card:hover::before{opacity:1}
+/* 4) Фото запчасти слегка приближается при наведении на карточку */
+.zp-img img{transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.zp-card:hover .zp-img img{transform:scale(1.05)}
+/* 5) Футер: фирменная линия сверху (жёлтый — зелёный) и отзывчивые ссылки */
+footer{position:relative}
+footer::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--primary-light) 50%,var(--accent))}
+footer a:hover{text-decoration:underline}
+/* 6) Контактные карточки и hero-кнопки: мягкий подъём при наведении */
+.c-card{transition:border-color .25s,transform .25s}
+.c-card:hover{border-color:rgba(245,184,0,.45);transform:translateY(-2px)}
+.hero-contacts a{transition:background .2s,transform .2s,box-shadow .2s}
+.hero-contacts a:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.18)}
+/* 7) Фильтры кранов: брендовая фокус-подсветка полей */
+.crane-filters input:focus,.crane-filters select:focus{border-color:var(--primary-light);box-shadow:0 0 0 3px rgba(26,93,58,.12);outline:none}
+/* 8) Брендовое выделение текста и аккуратный скроллбар */
+::selection{background:var(--accent);color:var(--primary-dark)}
+html{scrollbar-width:thin;scrollbar-color:#c3d1c6 transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#c3d1c6;border-radius:999px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--primary-light)}
+::-webkit-scrollbar-track{background:transparent}
+/* 9) Неактивные вкладки: лёгкое реагирование на наведение */
+.tab-btn:not(.active):hover{filter:brightness(1.06)}
+/* 10) На узких экранах — мягкая подсказка горизонтальной прокрутки панели вкладок */
+@media(max-width:900px){
+  .tab-nav::after{content:"";position:absolute;right:0;top:0;bottom:0;width:26px;background:linear-gradient(270deg,rgba(19,69,41,.95),rgba(19,69,41,0));pointer-events:none;z-index:2}
+}
+
 /* ===== ZP CONSOLE: блок «поиск + выбор групп» — единый компактный пульт ===== */
 /* Десктоп (>1100px): слева узкая колонка с компактным поиском и счётчиком под ним,
    справа — ВСЕ кнопки групп с переносом на 2 ряда; ничего не прячется за прокруткой */
